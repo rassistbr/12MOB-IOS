@@ -16,6 +16,7 @@
 		5EC3A86D1EAC649100F64873 /* comprasusa.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5EC3A86B1EAC649100F64873 /* comprasusa.xcdatamodeld */; };
 		5EC3A86F1EAC65C000F64873 /* UIViewController+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC3A86E1EAC65C000F64873 /* UIViewController+CoreData.swift */; };
 		5EC3A8711EAC6E0200F64873 /* NewProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC3A8701EAC6E0200F64873 /* NewProductViewController.swift */; };
+		5EC3A8731EACDE6500F64873 /* StatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC3A8721EACDE6500F64873 /* StatesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		5EC3A86C1EAC649100F64873 /* comprasusa.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = comprasusa.xcdatamodel; sourceTree = "<group>"; };
 		5EC3A86E1EAC65C000F64873 /* UIViewController+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreData.swift"; sourceTree = "<group>"; };
 		5EC3A8701EAC6E0200F64873 /* NewProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProductViewController.swift; sourceTree = "<group>"; };
+		5EC3A8721EACDE6500F64873 /* StatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				5EC3A86B1EAC649100F64873 /* comprasusa.xcdatamodeld */,
 				5EC3A86E1EAC65C000F64873 /* UIViewController+CoreData.swift */,
 				5EC3A8701EAC6E0200F64873 /* NewProductViewController.swift */,
+				5EC3A8721EACDE6500F64873 /* StatesViewController.swift */,
 			);
 			path = rotorresComprasUsa;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EC3A8731EACDE6500F64873 /* StatesViewController.swift in Sources */,
 				5EC3A8561EAC5FD100F64873 /* AppDelegate.swift in Sources */,
 				5EC3A86F1EAC65C000F64873 /* UIViewController+CoreData.swift in Sources */,
 				5EC3A86D1EAC649100F64873 /* comprasusa.xcdatamodeld in Sources */,

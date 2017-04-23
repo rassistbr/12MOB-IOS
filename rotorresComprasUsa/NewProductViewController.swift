@@ -15,6 +15,8 @@ class NewProductViewController: UIViewController {
     @IBOutlet weak var tfProductValue: UITextField!
     @IBOutlet weak var swProductByCard: UISwitch!
     @IBOutlet weak var ivProductPoster: UIImageView!
+    @IBOutlet weak var tfProductState: UITextField!
+    @IBOutlet weak var btNewState: UIButton!
     @IBOutlet weak var btNewProduct: UIButton!
     @IBOutlet weak var btClose: UIButton!
     
