@@ -30,6 +30,7 @@ class NewProductViewController: UIViewController {
     var pickerView: UIPickerView!
     
     var stateDataSource: [State] = []
+    var selectedState: State? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,10 @@ class NewProductViewController: UIViewController {
         if product != nil {
             tfProductName.text = product.name
             tfProductValue.text = "\(product.value)"
-            tfProductState.text = product.states?.name
+            
+            if (product.states as State?) != nil {
+                tfProductState.text = product.states!.name
+            }
             
             if let image = product.poster as? UIImage {
                 ivProductPoster.image = image
@@ -62,7 +66,12 @@ class NewProductViewController: UIViewController {
     
     
     @IBAction func close(_ sender: UIButton?) {
-        dismiss(animated: true, completion: nil)
+        if sender?.title(for: .normal) == "Cadastrar" {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+        
         if product != nil && product.name == nil {
             context.delete(product)
         }
@@ -77,7 +86,8 @@ class NewProductViewController: UIViewController {
         product.name = tfProductName.text!
         product.value = Double(tfProductValue.text!)!
         product.bycard = swProductByCard.isOn
-
+        product.states = selectedState
+        
         if smallImage != nil {
             product.poster = smallImage
         }
@@ -88,7 +98,7 @@ class NewProductViewController: UIViewController {
             print(error.localizedDescription)
         }
         
-        close(nil)
+        close(sender)
     }
     
     
@@ -160,7 +170,6 @@ class NewProductViewController: UIViewController {
         pickerView.delegate = self
         pickerView.dataSource = self
         
-        
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
         let btCancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
         let btSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -176,6 +185,7 @@ class NewProductViewController: UIViewController {
 
 extension NewProductViewController: UIPickerViewDelegate {
      func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        selectedState = stateDataSource[row]
         return stateDataSource[row].name
     }
 }

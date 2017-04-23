@@ -18,6 +18,7 @@
 		5EC3A8711EAC6E0200F64873 /* NewProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC3A8701EAC6E0200F64873 /* NewProductViewController.swift */; };
 		5EC3A8731EACDE6500F64873 /* StatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC3A8721EACDE6500F64873 /* StatesViewController.swift */; };
 		5EC3A87A1EAD012C00F64873 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5EC3A8791EAD012C00F64873 /* Settings.bundle */; };
+		5EC3A87C1EAD33F500F64873 /* TotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC3A87B1EAD33F500F64873 /* TotalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		5EC3A8701EAC6E0200F64873 /* NewProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProductViewController.swift; sourceTree = "<group>"; };
 		5EC3A8721EACDE6500F64873 /* StatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatesViewController.swift; sourceTree = "<group>"; };
 		5EC3A8791EAD012C00F64873 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		5EC3A87B1EAD33F500F64873 /* TotalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				5EC3A8701EAC6E0200F64873 /* NewProductViewController.swift */,
 				5EC3A8721EACDE6500F64873 /* StatesViewController.swift */,
 				5EC3A8791EAD012C00F64873 /* Settings.bundle */,
+				5EC3A87B1EAD33F500F64873 /* TotalViewController.swift */,
 			);
 			path = rotorresComprasUsa;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				5EC3A8711EAC6E0200F64873 /* NewProductViewController.swift in Sources */,
 				5EC3A86A1EAC619100F64873 /* ProductsTableViewController.swift in Sources */,
 				5EC3A8681EAC600D00F64873 /* ProductsTableViewCell.swift in Sources */,
+				5EC3A87C1EAD33F500F64873 /* TotalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

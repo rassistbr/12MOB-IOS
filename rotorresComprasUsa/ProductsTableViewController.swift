@@ -18,7 +18,7 @@ class ProductsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.estimatedRowHeight = 200
-        tableView.rowHeight = 105 //UITableViewAutomaticDimension
+        tableView.rowHeight = 100
         label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 22))
         label.text = "Sem compras"
         label.textAlignment = .center
@@ -28,8 +28,12 @@ class ProductsTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? NewProductViewController {
-            vc.product = fetchedResultController.object(at: tableView.indexPathForSelectedRow!)
+        
+        if (sender as? UIBarButtonItem) == nil {
+            if let vc = segue.destination as? NewProductViewController {
+                let product = fetchedResultController.object(at: tableView.indexPathForSelectedRow!)
+                vc.product = product
+            }
         }
     }
 
@@ -75,7 +79,7 @@ class ProductsTableViewController: UITableViewController {
         let product = fetchedResultController.object(at: indexPath)
         
         cell.lCellProductName.text = product.name
-        cell.lCellProductState.text = "\(product.bycard)"
+        cell.lCellProductState.text = (product.bycard ? "Cartão" : "")
         cell.lCellProductValue.text = "\(product.value)"
 
         if let image = product.poster as? UIImage {
