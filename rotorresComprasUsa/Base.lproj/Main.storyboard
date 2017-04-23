@@ -219,6 +219,10 @@
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ec9-3V-PAC" id="TO5-vv-HZJ"/>
+                                    <outlet property="delegate" destination="Ec9-3V-PAC" id="gS7-hJ-Tx9"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xnf-IQ-ImF">
                                 <rect key="frame" x="172" y="518" width="132" height="30"/>
