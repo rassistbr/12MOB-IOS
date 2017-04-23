@@ -30,6 +30,24 @@ class StatesViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let defaults = UserDefaults.standard
+        if let dolar = defaults.string(forKey: "tfSettingsDolar"){
+            tfDolar.text = dolar
+        } else{
+            tfDolar.text = ""
+        }
+        
+        if let iof = defaults.string(forKey: "tfSettingsIOF"){
+            tfIOF.text = iof
+        } else{
+            tfIOF.text = ""
+        }
+    }
+    
+    
     func loadStates() {
         let fetchRequest: NSFetchRequest<State> = State.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -91,6 +109,17 @@ enum StateAlertType {
 }
 
 
+extension StatesViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        UserDefaults.standard.set(Double(tfDolar.text!), forKey: "tfSettingsDolar")
+        UserDefaults.standard.set(Double(tfIOF.text!), forKey: "tfSettingsIOF")
+        
+    }
+}
+
+
+
 extension StatesViewController: UITableViewDelegate {
 }
 
@@ -110,6 +139,27 @@ extension StatesViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = "\(state.tax)"
         cell.detailTextLabel?.textColor = .red
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Excluir") { (action: UITableViewRowAction, indexPath: IndexPath) in
+            let state = self.dataSource[indexPath.row]
+            self.context.delete(state)
+            try! self.context.save()
+            self.dataSource.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let state = self.dataSource[indexPath.row]
+        tableView.setEditing(false, animated: true)
+        self.showAlert(type: .edit, state: state)
     }
     
 }

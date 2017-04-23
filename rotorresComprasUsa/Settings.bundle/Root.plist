@@ -12,7 +12,7 @@
 			<key>Title</key>
 			<string>Cotação do dólar (R$):</string>
 			<key>Key</key>
-			<string>tfSettingsCotacao</string>
+			<string>tfSettingsDolar</string>
 			<key>KeyboardType</key>
 			<string>NumbersAndPunctuation</string>
 		</dict>
