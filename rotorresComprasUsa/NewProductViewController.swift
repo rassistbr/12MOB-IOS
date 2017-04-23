@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreMotion
 
 class NewProductViewController: UIViewController {
 
@@ -21,17 +22,23 @@ class NewProductViewController: UIViewController {
     @IBOutlet weak var btClose: UIButton!
     
     var product: Product!
+    
     var imagePicker = UIImagePickerController()
     var smallImage: UIImage!
     
+    var motionManager = CMMotionManager()
+    var pickerView: UIPickerView!
+    
+    var stateDataSource: [State] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadStatesPicker()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! StatesViewController
@@ -101,7 +108,72 @@ class NewProductViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    func cancel() {
+        tfProductState.resignFirstResponder()
+    }
+    
+    func done() {
+        tfProductState.text = stateDataSource[pickerView.selectedRow(inComponent: 0)].name
+        cancel()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.becomeFirstResponder()
+    }
 
+    func loadStates() {
+        let fetchRequest: NSFetchRequest<State> = State.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        do {
+            stateDataSource = try context.fetch(fetchRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func loadStatesPicker(){
+        
+        loadStates()
+        
+        pickerView = UIPickerView()
+        pickerView.backgroundColor = .white
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+        let btCancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+        let btSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let btDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        toolbar.items = [btCancel, btSpace, btDone]
+        
+        tfProductState.inputView = pickerView
+        tfProductState.inputAccessoryView = toolbar
+    }
+
+}
+
+
+extension NewProductViewController: UIPickerViewDelegate {
+     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return stateDataSource[row].name
+    }
+}
+
+extension NewProductViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return stateDataSource.count
+    }
 }
 
 
