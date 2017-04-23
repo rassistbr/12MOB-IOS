@@ -46,23 +46,23 @@ class TotalViewController: UIViewController {
     
     func calculateTotals() {
         
+        let iof = UserDefaults.standard.double(forKey: "tfSettingsIOF") as Double?
+        let dolar = UserDefaults.standard.double(forKey: "tfSettingsDolar") as Double?
+        
+        var individualTax: Double = 0.0
         for product in fetchedResultController.fetchedObjects! {
             total = total + product.value
-            totalTax = totalTax + ((product.value * (product.states?.tax)!)/100)
+            if let stateTax = (product.states?.tax) as Double? {
+                individualTax = ((product.value * stateTax)/100)
+            }
+            
+            totalTax = totalTax + individualTax
+            if product.bycard {
+                totalIOF = totalIOF + ((product.value + individualTax)*iof!/100)
+            }
         }
-        
-        totalAll = total + totalTax
-        
-        if let iof = UserDefaults.standard.double(forKey: "tfSettingsIOF") as Double? {
-            totalIOF = (totalAll * iof)/100
-        }
-        
-        totalAll = totalIOF + totalAll
-        
-        if let dolar = UserDefaults.standard.double(forKey: "tfSettingsDolar") as Double? {
-            totalBRL = totalAll * dolar
-        }
-        
+        totalAll = totalIOF + totalTax + total
+        totalBRL = totalAll * dolar!
     }
     
     
@@ -73,13 +73,23 @@ class TotalViewController: UIViewController {
         lTotalAll.text = "\(totalAll)"
         lTotalBRZ.text = "\(totalBRL)"
     }
+    
 
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        total = 0.0
+        totalTax = 0.0
+        totalIOF = 0.0
+        totalAll = 0.0
+        totalBRL = 0.0
+        
         loadProducts()
         calculateTotals()
         setLayout()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
 
     override func didReceiveMemoryWarning() {

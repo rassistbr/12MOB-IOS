@@ -83,22 +83,33 @@ class NewProductViewController: UIViewController {
         if product == nil {
             product = Product(context: context)
         }
-        product.name = tfProductName.text!
-        product.value = Double(tfProductValue.text!)!
-        product.bycard = swProductByCard.isOn
-        product.states = selectedState
         
-        if smallImage != nil {
-            product.poster = smallImage
+        if !(tfProductName.text?.isEmpty)! &&
+           !(tfProductValue.text?.isEmpty)! &&
+            !(tfProductState.text?.isEmpty)! {
+        
+            product.name = tfProductName.text!
+            product.value = Double(tfProductValue.text!)!
+            product.bycard = swProductByCard.isOn
+            product.states = selectedState
+            
+            if smallImage != nil {
+                product.poster = smallImage
+            }
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            close(sender)
+        } else {
+            let alert = UIAlertController(title: "Validação", message: "Preenha todos os campos", preferredStyle: .actionSheet)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert ,animated: true,completion: nil)
         }
-        
-        do {
-            try context.save()
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        close(sender)
     }
     
     
@@ -198,7 +209,6 @@ extension NewProductViewController: UIPickerViewDataSource {
         return stateDataSource.count
     }
 }
-
 
 extension NewProductViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
