@@ -57,6 +57,7 @@
                                     <outlet property="lCellProductName" destination="foc-AG-QJJ" id="Vff-To-Ts4"/>
                                     <outlet property="lCellProductState" destination="5bE-4S-h8A" id="Uox-Zh-Md9"/>
                                     <outlet property="lCellProductValue" destination="TIw-i7-cOX" id="9OP-lb-8g0"/>
+                                    <segue destination="4eL-fH-Byz" kind="show" id="NRv-dC-xg4"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -311,4 +312,7 @@
     <resources>
         <image name="pallete" width="512" height="512"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="NRv-dC-xg4"/>
+    </inferredMetricsTieBreakers>
 </document>

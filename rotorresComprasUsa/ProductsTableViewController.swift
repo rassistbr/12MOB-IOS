@@ -18,13 +18,19 @@ class ProductsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.estimatedRowHeight = 200
-        tableView.rowHeight = 105//UITableViewAutomaticDimension
+        tableView.rowHeight = 105 //UITableViewAutomaticDimension
         label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 22))
         label.text = "Sem compras"
         label.textAlignment = .center
         label.textColor = .black
         
         loadProducts()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? NewProductViewController {
+            vc.product = fetchedResultController.object(at: tableView.indexPathForSelectedRow!)
+        }
     }
 
     func loadProducts() {
@@ -43,17 +49,11 @@ class ProductsTableViewController: UITableViewController {
         
     }
 
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
@@ -82,6 +82,20 @@ class ProductsTableViewController: UITableViewController {
             cell.ivCellProduct.image = image
         }
         return cell
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let product = fetchedResultController.object(at: indexPath)
+            context.delete(product)
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 
 }

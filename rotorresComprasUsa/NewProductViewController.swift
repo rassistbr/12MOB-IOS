@@ -34,6 +34,18 @@ class NewProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadStatesPicker()
+        
+        if product != nil {
+            tfProductName.text = product.name
+            tfProductValue.text = "\(product.value)"
+            tfProductState.text = product.states?.name
+            
+            if let image = product.poster as? UIImage {
+                ivProductPoster.image = image
+            }
+            btNewProduct.setTitle("Atualizar", for: .normal)
+            btClose.isHidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,6 +70,7 @@ class NewProductViewController: UIViewController {
     
     
     @IBAction func addNewProduct(_ sender: UIButton) {
+        
         if product == nil {
             product = Product(context: context)
         }
